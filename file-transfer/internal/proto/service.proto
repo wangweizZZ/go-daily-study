@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package = "wangweizZZ/go-daily-study/grpc/proto";
+
+
+service TransferService {
+        rpc Open(FileInfo) returns (FileInfoResult){}
+        rpc Write(stream Chunk) returns (ChunkResult){}
+}
+
+message FileInfo {
+        string name = 1;
+        int64 size = 2;
+        string md5 = 3;
+        bool append = 4;
+}
+
+message FileInfoResult{
+        string id = 1;
+        int64 offset = 2;
+}
+
+message Chunk {
+        string id = 1;
+        int64 offset = 2;
+        bytes content = 3;
+}
+
+message ChunkResult{
+        int64 offset = 1;
+        string message = 2;
+        ResultCode code = 3;
+}
+
+
+enum ResultCode {
+        Unknown = 0;
+        Ok = 1;
+        Failed = 2;
+}
