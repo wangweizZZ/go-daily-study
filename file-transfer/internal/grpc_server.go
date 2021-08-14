@@ -163,7 +163,7 @@ func (s *grpcServer) Start() error {
 		if err != nil {
 			return err
 		}
-		grpc.Creds(altsTC)
+		opts = append(opts, grpc.Creds(altsTC))
 	}
 
 	s.innerServer = grpc.NewServer(opts...)
