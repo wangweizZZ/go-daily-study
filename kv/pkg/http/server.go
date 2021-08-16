@@ -7,6 +7,8 @@ import (
 	"wangweizZZ/kv/pkg/bitcask"
 )
 
+// Just a sample for support http
+
 const favicon = "favicon.ico"
 
 func InternalError(w http.ResponseWriter, r *http.Request) {

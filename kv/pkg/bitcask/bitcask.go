@@ -64,18 +64,18 @@ func Open(dirPath string) (*Bitcask, error) {
 		dirPath:      dirPath,
 		activeFile:   activeFile,
 		archiveFiles: archiveFileMap,
-		maxSize:      100 * 1024,
+		maxSize:      100 * 1024 * 1024,
 	}
 
 	{
 		// start merge task
-		// ticker := time.NewTicker(time.Second * 10)
-		// go func() {
-		// 	for range ticker.C {
-		// 		log.Printf("merge at %v", time.Now())
-		// 		bitcask.Merge()
-		// 	}
-		// }()
+		ticker := time.NewTicker(time.Second * 10)
+		go func() {
+			for range ticker.C {
+				log.Printf("merge at %v", time.Now())
+				bitcask.Merge()
+			}
+		}()
 	}
 	return bitcask, nil
 }
